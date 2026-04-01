@@ -41,7 +41,7 @@
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Nunito Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-family: 'Nunito Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
   h1, h2, h3, h4, h5 { font-family: 'Nunito', sans-serif; line-height: 1.15; letter-spacing: -0.01em; font-weight: 800; }
   a { text-decoration: none; }
 
@@ -233,6 +233,7 @@
   .search-icon { font-size: 20px; color: var(--text-soft); flex-shrink: 0; }
   .search-box input { flex: 1; border: none; outline: none; font-family: 'Nunito Sans', sans-serif; font-size: 16px; color: var(--text); background: transparent; min-width: 0; }
   .search-box input::placeholder { color: rgba(255,255,255,0.32); }
+  .hero-search-box input::placeholder { color: var(--text-soft); }
   .search-divider { width: 1px; height: 30px; background: var(--border); flex-shrink: 0; }
   .location-select { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid); cursor: pointer; white-space: nowrap; }
   .search-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
@@ -619,13 +620,13 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-eyebrow"><div class="dot"></div><span>Coming Soon · Launching Summer 2026</span></div>
+      <div class="hero-eyebrow"><div class="dot"></div><span>Vendor Marketplace · Launching Summer 2026</span></div>
       <h1 class="hero-headline"><span class="hl-line1">Las Vegas event planners.</span><span class="hl-line2">The party starts here.</span></h1>
       <p class="hero-sub">One place to find, compare, and book every local vendor your party needs. No more juggling tabs, chasing quotes, or hoping for the best.</p>
       <div class="hero-search-wrap">
         <div class="search-box hero-search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" placeholder="Search vendor type, name, or keyword...">
+          <input type="text" placeholder="Search vendors...">
           <div class="search-divider"></div>
           <div class="location-select"><span>📍</span><span>Las Vegas, NV</span><span style="font-size:11px;color:var(--text-soft)">▾</span></div>
           <a href="marketplace.html" class="btn btn-coral" style="border-radius:var(--radius)">Search</a>
@@ -996,32 +997,32 @@ function handleWaitlist(btn){
       </div>
       <div class="footer-col">
         <h5>For Planners</h5>
-        <a href="#">Browse Vendors</a>
-        <a href="#">Post an Event</a>
-        <a href="#">How It Works</a>
-        <a href="#">Join the Waitlist</a>
+        <a href="marketplace.html">Browse Vendors</a>
+        <a href="#" onclick="openPostEvent();return false;">Post an Event</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#waitlist">Join the Waitlist</a>
       </div>
       <div class="footer-col">
         <h5>For Vendors</h5>
-        <a href="#">List Your Business</a>
-        <a href="#">Vendor FAQ</a>
-        <a href="#">Success Stories</a>
-        <a href="#">Contact Us</a>
+        <a href="vendor-landing.html">List Your Business</a>
+        <a href="#" aria-label="Coming soon">Vendor FAQ</a>
+        <a href="#" aria-label="Coming soon">Success Stories</a>
+        <a href="#" aria-label="Coming soon">Contact Us</a>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
-        <a href="#">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Press</a>
-        <a href="#">Contact</a>
+        <a href="#" aria-label="Coming soon">About</a>
+        <a href="#" aria-label="Coming soon">Blog</a>
+        <a href="#" aria-label="Coming soon">Press</a>
+        <a href="#" aria-label="Coming soon">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 Party Local, Inc. All rights reserved. Las Vegas, NV.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+        <a href="#" aria-label="Coming soon">Privacy Policy</a>
+        <a href="#" aria-label="Coming soon">Terms of Service</a>
+        <a href="#" aria-label="Coming soon">Cookie Policy</a>
       </div>
     </div>
   </div>
