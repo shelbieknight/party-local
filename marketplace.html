@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Vendors — Party Local Las Vegas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --coral: #E8643A;
+  --coral-dark: #C44A20;
+    --purple: #6B2FA0;
+    --purple-dark: #4A1A78;
+    --purple-light: #9B5CC8;
+  --gold: #F5C842;
+  --gold-dark: #C07800;
+  --dark: #2D0A5C;
+  --bg: #FDFBFF;
+  --bg-warm: #F8F4FF;
+  --bg-2: #EDE8F5;
+  --text: #1A1025;
+  --text-mid: #4A3A60;
+  --text-soft: #8A7AA0;
+  --border: rgba(0,0,0,0.08);
+  --radius: 16px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.07);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --shadow-pop: 0 8px 28px rgba(232,100,58,0.28);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Nunito Sans',sans-serif; background:var(--bg-2); color:var(--text); overflow-x:hidden; line-height:1.6; }
+h1,h2,h3,h4 { font-family:'Nunito',sans-serif; line-height:1.15; letter-spacing:-0.01em; font-weight:800; }
+a { text-decoration:none; color:inherit; }
+button { cursor:pointer; }
+
+/* ── NAV ── */
+.nav { position:sticky; top:0; z-index:50; background:rgba(255,253,248,0.96); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+.nav-inner { display:flex; align-items:center; justify-content:space-between; height:64px; max-width:1320px; margin:0 auto; padding:0 24px; gap:16px; }
+.nav-logo { font-family:'Nunito',sans-serif; font-weight:800; font-size:18px; color:var(--text); display:flex; align-items:center; gap:9px; flex-shrink:0; }
+.nav-logo .dot { width:30px; height:30px; background:var(--coral); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; }
+.nav-search { flex:1; max-width:480px; position:relative; }
+.nav-search input { width:100%; background:#fff; border:1.5px solid var(--border); border-radius:100px; padding:9px 16px 9px 40px; font-family:'Nunito Sans',sans-serif; font-size:14px; color:var(--text); outline:none; transition:border-color 0.2s; }
+.nav-search input:focus { border-color:var(--coral); }
+.nav-search input::placeholder { color:var(--text-soft); }
+.nav-search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:15px; pointer-events:none; }
+.nav-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.btn { display:inline-flex; align-items:center; gap:6px; font-family:'Nunito',sans-serif; font-weight:700; font-size:14px; padding:9px 20px; border-radius:100px; border:none; transition:all 0.2s; white-space:nowrap; }
+.btn-coral { background:var(--coral); color:#fff; }
+.btn-coral:hover { background:var(--coral-dark); transform:translateY(-1px); box-shadow:var(--shadow-coral); }
+.btn-outline { background:transparent; color:var(--text-mid); border:1.5px solid var(--border); }
+.btn-outline:hover { border-color:var(--coral); color:var(--coral-dark); }
+.btn-text { background:none; border:none; color:var(--text-mid); font-family:'Nunito',sans-serif; font-weight:700; font-size:14px; padding:9px 12px; border-radius:100px; transition:color 0.2s; }
+.btn-text:hover { color:var(--coral); background:rgba(232,100,58,0.06); }
+
+/* ── PAGE LAYOUT ── */
+.page { max-width:1320px; margin:0 auto; padding:28px 24px 80px; display:grid; grid-template-columns:260px 1fr; gap:28px; align-items:start; }
+
+/* ── SIDEBAR FILTERS ── */
+.sidebar { background:#fff; border-radius:var(--radius-lg); padding:24px; border:1.5px solid var(--border); position:sticky; top:88px; }
+.sidebar-title { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-soft); margin-bottom:16px; }
+.filter-section { margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--border); }
+.filter-section:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.filter-label { font-family:'Nunito',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:12px; display:block; }
+.filter-options { display:flex; flex-direction:column; gap:8px; }
+.filter-opt { display:flex; align-items:center; gap:10px; cursor:pointer; }
+.filter-opt input[type="checkbox"] { display:none; }
+.filter-opt-box { width:18px; height:18px; border-radius:5px; border:1.5px solid var(--border); background:#fff; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
+.filter-opt input:checked + .filter-opt-box { background:var(--coral); border-color:var(--coral); }
+.filter-opt input:checked + .filter-opt-box::after { content:'✓'; color:#fff; font-size:11px; font-weight:700; }
+.filter-opt-label { font-size:14px; color:var(--text-mid); }
+.filter-opt-count { font-size:12px; color:var(--text-soft); margin-left:auto; }
+.price-range { display:flex; flex-direction:column; gap:8px; }
+.price-inputs { display:flex; gap:6px; align-items:center; width:100%; overflow:hidden; }
+.price-input { flex:1; min-width:0; width:0; background:var(--bg-2); border:1.5px solid var(--border); border-radius:10px; padding:8px 8px; font-family:'Nunito Sans',sans-serif; font-size:13px; color:var(--text); outline:none; }
+.price-input:focus { border-color:var(--coral); }
+.price-sep { font-size:13px; color:var(--text-soft); flex-shrink:0; }
+.rating-options { display:flex; gap:8px; flex-wrap:wrap; }
+.rating-opt { padding:6px 14px; border-radius:100px; border:1.5px solid var(--border); font-size:13px; font-weight:700; color:var(--text-mid); cursor:pointer; transition:all 0.15s; background:#fff; }
+.rating-opt:hover, .rating-opt.active { background:var(--coral); border-color:var(--coral); color:#fff; }
+.avail-toggle { display:flex; align-items:center; justify-content:space-between; }
+.toggle { width:44px; height:24px; border-radius:100px; background:var(--border); border:none; position:relative; cursor:pointer; transition:background 0.2s; }
+.toggle.on { background:var(--coral); }
+.toggle::after { content:''; position:absolute; width:18px; height:18px; border-radius:50%; background:#fff; top:3px; left:3px; transition:transform 0.2s; box-shadow:0 1px 4px rgba(0,0,0,0.2); }
+.toggle.on::after { transform:translateX(20px); }
+.clear-filters { width:100%; padding:10px; border-radius:100px; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; color:var(--text-soft); background:var(--bg-2); border:1.5px solid transparent; cursor:not-allowed; transition:all 0.2s; margin-top:4px; opacity:0.5; }
+.clear-filters.has-filters { color:var(--coral); background:rgba(232,100,58,0.08); border-color:rgba(232,100,58,0.25); cursor:pointer; opacity:1; }
+.clear-filters.has-filters:hover { background:rgba(232,100,58,0.15); border-color:var(--coral); }
+
+/* ── MAIN CONTENT ── */
+.main { min-width:0; overflow:hidden; }
+
+/* Category chips */
+.cat-chips-wrap { position:relative; margin-bottom:20px; overflow:hidden; }
+.cat-chips-wrap::after { content:''; position:absolute; right:0; top:0; bottom:4px; width:60px; background:linear-gradient(to right, transparent, var(--bg-2)); pointer-events:none; z-index:1; }
+.cat-chips { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; cursor:grab; }
+.cat-chips::-webkit-scrollbar { display:none; }
+.cat-chip { display:flex; align-items:center; gap:6px; padding:8px 16px; border-radius:100px; border:1.5px solid var(--border); background:#fff; font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text-mid); cursor:pointer; transition:all 0.15s; white-space:nowrap; flex-shrink:0; }
+.cat-chip:hover { border-color:var(--coral); color:var(--coral-dark); }
+.cat-chip.active { background:var(--coral); border-color:var(--coral); color:#fff; }
+.cat-chip .emoji { font-size:16px; }
+
+/* Results header */
+.results-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
+.results-count { font-family:'Nunito',sans-serif; font-size:15px; font-weight:700; color:var(--text); }
+.results-count span { color:var(--text-soft); font-weight:600; }
+.sort-wrap { display:flex; align-items:center; gap:8px; }
+.sort-label { font-size:13px; color:var(--text-soft); }
+.sort-select { background:#fff; border:1.5px solid var(--border); border-radius:100px; padding:7px 32px 7px 14px; font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text); outline:none; cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A8A82' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; background-size:10px; }
+
+/* Active filters */
+.active-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+.filter-tag { display:flex; align-items:center; gap:6px; padding:5px 12px; border-radius:100px; background:rgba(232,100,58,0.1); color:var(--coral-dark); font-size:12px; font-weight:700; }
+.filter-tag-x { cursor:pointer; opacity:0.6; font-size:14px; transition:opacity 0.15s; }
+.filter-tag-x:hover { opacity:1; }
+
+/* VENDOR GRID */
+.vendor-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+.vendor-card { background:#fff; border-radius:var(--radius-lg); overflow:hidden; border:1.5px solid var(--border); cursor:pointer; transition:all 0.22s ease; }
+.vendor-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:rgba(255,107,107,0.25); }
+.vendor-card.hidden { display:none; }
+.vendor-img { height:180px; display:flex; align-items:center; justify-content:center; font-size:56px; position:relative; overflow:hidden; }
+.vendor-img-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,14,26,0.5) 0%, transparent 55%); }
+.vendor-img-badges { position:absolute; top:10px; left:10px; display:flex; gap:5px; }
+.badge { display:inline-flex; align-items:center; font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; }
+.badge-gold { background:rgba(245,200,66,0.9); color:#5A3A00; }
+.badge-coral { background:rgba(255,107,107,0.9); color:#fff; }
+.badge-mint { background:rgba(78,205,196,0.9); color:#003A38; }
+.badge-new { background:rgba(255,255,255,0.9); color:var(--text); }
+.vendor-price { position:absolute; bottom:10px; right:10px; font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; color:#fff; }
+.vendor-price span { font-size:11px; font-weight:500; opacity:0.8; }
+.vendor-body { padding:16px; }
+.vendor-meta { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:6px; }
+.vendor-name { font-family:'Nunito',sans-serif; font-size:16px; font-weight:800; color:var(--text); }
+.vendor-type { font-size:12px; color:var(--text-soft); margin-top:1px; }
+.vendor-rating { display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.stars { color:var(--gold); font-size:12px; }
+.rating-num { font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; color:var(--text); }
+.rating-reviews { font-size:11px; color:var(--text-soft); }
+.vendor-tags { display:flex; gap:5px; flex-wrap:wrap; margin:8px 0; }
+.tag-pill { font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--bg-2); color:var(--text-mid); }
+.vendor-footer { display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border); }
+.vendor-avail { font-size:12px; font-weight:700; color:#1A8050; display:flex; align-items:center; gap:5px; }
+.vendor-avail::before { content:''; width:6px; height:6px; border-radius:50%; background:#4ECDC4; }
+.view-btn { padding:7px 16px; font-size:12px; }
+
+/* No results */
+.no-results { text-align:center; padding:64px 24px; display:none; }
+.no-results h3 { font-size:20px; color:var(--text); margin-bottom:8px; }
+.no-results p { font-size:15px; color:var(--text-soft); }
+
+/* ── PROFILE DRAWER ── */
+.drawer-overlay { position:fixed; inset:0; z-index:200; background:rgba(11,14,26,0.5); opacity:0; pointer-events:none; transition:opacity 0.3s; }
+.drawer-overlay.open { opacity:1; pointer-events:all; }
+.drawer { position:fixed; top:0; right:0; bottom:0; z-index:201; width:min(580px, 100vw); background:var(--bg); transform:translateX(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y:auto; box-shadow:-16px 0 64px rgba(0,0,0,0.2); }
+.drawer.open { transform:translateX(0); }
+.drawer-close { position:sticky; top:0; z-index:10; background:rgba(255,253,248,0.94); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--border); }
+.drawer-close-btn { width:32px; height:32px; border-radius:50%; background:var(--bg-2); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--text); transition:background 0.15s; }
+.drawer-close-btn:hover { background:var(--border); }
+.drawer-close-label { font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text-soft); }
+.drawer-cta-top .btn { padding:8px 20px; font-size:13px; }
+
+/* Drawer content */
+.drawer-hero { height:260px; display:flex; align-items:center; justify-content:center; font-size:80px; position:relative; overflow:hidden; }
+.drawer-hero-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,14,26,0.6) 0%, transparent 55%); }
+.drawer-hero-badge { position:absolute; top:16px; left:16px; }
+.drawer-hero-price { position:absolute; bottom:16px; right:16px; font-family:'Nunito',sans-serif; font-size:18px; font-weight:900; color:#fff; }
+.drawer-hero-price span { font-size:12px; font-weight:500; opacity:0.8; }
+.drawer-body { padding:24px; }
+.drawer-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:4px; }
+.drawer-name { font-size:24px; font-weight:900; color:var(--text); }
+.drawer-rating { display:flex; align-items:center; gap:5px; }
+.drawer-stars { color:var(--gold); font-size:14px; }
+.drawer-rating-num { font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; }
+.drawer-rating-count { font-size:13px; color:var(--text-soft); }
+.drawer-meta { display:flex; gap:16px; margin:8px 0 16px; flex-wrap:wrap; }
+.drawer-meta-item { font-size:13px; color:var(--text-mid); display:flex; align-items:center; gap:5px; }
+.drawer-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+.drawer-tag { font-size:12px; font-weight:700; padding:4px 12px; border-radius:100px; background:var(--bg-2); color:var(--text-mid); }
+.drawer-tag.highlight { background:rgba(232,100,58,0.1); color:var(--coral-dark); }
+
+/* Drawer sections */
+.drawer-section { margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.drawer-section:last-child { border-bottom:none; }
+.drawer-section-title { font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-soft); margin-bottom:14px; }
+.drawer-about { font-size:15px; color:var(--text-mid); line-height:1.75; }
+
+/* Packages */
+.packages { display:flex; flex-direction:column; gap:12px; }
+.package { background:#fff; border:1.5px solid var(--border); border-radius:var(--radius); padding:16px; transition:border-color 0.15s; }
+.package:hover { border-color:var(--coral); }
+.package-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
+.package-name { font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; color:var(--text); }
+.package-price { font-family:'Nunito',sans-serif; font-size:18px; font-weight:900; color:var(--coral); }
+.package-price span { font-size:12px; color:var(--text-soft); font-weight:600; }
+.package-desc { font-size:13px; color:var(--text-mid); line-height:1.6; }
+.package-includes { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.package-inc { font-size:11px; font-weight:700; padding:3px 9px; border-radius:100px; background:var(--bg-2); color:var(--text-mid); }
+.package-popular { font-size:10px; font-weight:700; padding:2px 8px; border-radius:100px; background:rgba(245,200,66,0.2); color:var(--gold-dark); margin-left:8px; vertical-align:middle; }
+
+/* Availability */
+.avail-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.avail-day { text-align:center; padding:6px 0; border-radius:8px; font-size:11px; font-family:'Nunito',sans-serif; }
+.avail-day .day-name { font-weight:700; color:var(--text-soft); font-size:10px; margin-bottom:2px; }
+.avail-day .day-num { font-weight:800; font-size:14px; color:var(--text); }
+.avail-day.available { background:rgba(78,205,196,0.12); }
+.avail-day.available .day-num { color:#1A8050; }
+.avail-day.booked { background:var(--bg-2); }
+.avail-day.booked .day-num { color:var(--text-soft); text-decoration:line-through; }
+.avail-day.today { background:var(--coral); }
+.avail-day.today .day-name, .avail-day.today .day-num { color:#fff; }
+
+/* Reviews */
+.reviews { display:flex; flex-direction:column; gap:16px; }
+.review { }
+.review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.review-author { display:flex; align-items:center; gap:10px; }
+.review-avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.review-name { font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; color:var(--text); }
+.review-event { font-size:12px; color:var(--text-soft); }
+.review-stars { color:var(--gold); font-size:12px; }
+.review-text { font-size:14px; color:var(--text-mid); line-height:1.65; }
+.review-date { font-size:11px; color:var(--text-soft); margin-top:4px; }
+
+/* Drawer bottom CTA */
+.drawer-bottom { position:sticky; bottom:0; background:rgba(255,253,248,0.96); backdrop-filter:blur(12px); border-top:1px solid var(--border); padding:16px 24px; display:flex; gap:10px; align-items:center; }
+.drawer-bottom .btn-coral { flex:1; justify-content:center; padding:13px; font-size:15px; }
+.drawer-bottom .btn-outline { padding:13px 20px; }
+
+/* RESPONSIVE */
+@media (max-width:1100px) { .vendor-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:900px) { 
+  .page { grid-template-columns:1fr; }
+  .sidebar { position:static; display:none; }
+  .sidebar.mobile-open { display:block; }
+}
+@media (max-width:640px) { 
+  .vendor-grid { grid-template-columns:1fr; }
+  .nav-search { display:none; }
+  .nav-inner { height:auto; min-height:56px; padding:10px 16px; flex-wrap:wrap; gap:10px; }
+  .nav-logo { font-size:16px; }
+  .nav-logo .dot { width:26px; height:26px; font-size:12px; }
+  .nav-right .btn-text { display:none; }
+  .nav-right .btn { padding:7px 14px; font-size:13px; }
+}
+
+  .date-chips { display:flex; flex-direction:column; gap:6px; }
+  .date-chip { background:var(--coral); border:none; border-radius:100px; padding:8px 16px; font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:#fff; cursor:pointer; transition:all 0.15s; text-align:left; opacity:0.65; }
+  .date-chip:hover { opacity:0.85; }
+  .date-chip.active { opacity:1; box-shadow:0 2px 8px rgba(232,100,58,0.35); }
+
+  /* Active filter pills */
+  .active-filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; min-height:0; }
+  .filter-pill { display:inline-flex; align-items:center; gap:6px; background:var(--coral); color:#fff; border-radius:100px; padding:5px 12px; font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; }
+  .filter-pill-remove { background:none; border:none; color:#fff; cursor:pointer; font-size:14px; line-height:1; padding:0; opacity:0.8; }
+  .filter-pill-remove:hover { opacity:1; }
+
+  /* Empty state */
+  .empty-state { display:none; flex-direction:column; align-items:center; justify-content:center; padding:80px 20px; text-align:center; grid-column:1/-1; }
+  .empty-state-icon { font-size:48px; margin-bottom:16px; }
+  .empty-state h3 { font-family:'Nunito',sans-serif; font-size:20px; font-weight:800; color:var(--text); margin-bottom:8px; }
+  .empty-state p { font-size:14px; color:var(--text-soft); margin-bottom:20px; }
+  .empty-state .btn { display:inline-flex; }
+
+  /* Heart save button */
+  .save-btn { position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,0.9); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; transition:all 0.15s; z-index:2; backdrop-filter:blur(4px); }
+  .save-btn:hover { background:#fff; transform:scale(1.1); }
+  .save-btn.saved { background:#fff; }
+  .save-btn.saved .heart { color:var(--coral); }
+  .heart { color:#ccc; transition:color 0.15s; }
+
+  /* Sort — move above results, more prominent */
+  .results-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+  .sort-select { padding:7px 32px 7px 12px; border-radius:100px; border:1.5px solid var(--border); font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text); background:#fff; cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; background-size:10px; }
+  .sort-select:focus { outline:none; border-color:var(--coral); }
+
+  .nav-hamburger { display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; }
+  .nav-hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all 0.2s; }
+  .mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(255,253,248,0.98); backdrop-filter:blur(20px); z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-close { position:absolute; top:20px; right:20px; background:none; border:none; font-size:28px; cursor:pointer; color:var(--text-soft); line-height:1; }
+  .mobile-menu a { font-family:'Nunito',sans-serif; font-size:20px; font-weight:700; color:var(--text); text-decoration:none; }
+  .mobile-menu .btn { font-size:15px; padding:12px 28px; width:240px; text-align:center; justify-content:center; }
+  @media (max-width:768px) {
+    .nav-hamburger { display:flex; }
+    .nav-right { display:none; }
+    .nav-search { display:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="dot">🎉</div> Party Local
+    </a>
+    <div class="nav-search">
+      <span class="nav-search-icon">🔍</span>
+      <input type="text" placeholder="Search vendors, categories, or keywords..." id="search-input">
+    </div>
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <a href="homepage.html" class="btn btn-text" style="display:none" id="back-btn">← Back</a>
+      <button class="btn btn-outline" onclick="document.querySelector('.sidebar').classList.toggle('mobile-open')" style="display:none" id="filter-btn">⚙ Filters</button>
+      <a href="vendor-landing.html" class="btn btn-outline">List Your Business</a>
+      <a href="#" class="btn btn-coral">Post an Event</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">Filters</div>
+
+    <div class="filter-section">
+      <span class="filter-label">Category</span>
+      <div class="filter-options" id="cat-filters">
+        <label class="filter-opt"><input type="checkbox" value="DJ" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">DJs &amp; Live Music</span><span class="filter-opt-count">4</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Photography" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Photography</span><span class="filter-opt-count">3</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Food" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Food Trucks &amp; Catering</span><span class="filter-opt-count">2</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Florist" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Florists</span><span class="filter-opt-count">1</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Bar" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Bar Service</span><span class="filter-opt-count">1</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Decor" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Balloon &amp; Decor</span><span class="filter-opt-count">1</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Wedding" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Wedding Coordinators</span><span class="filter-opt-count">1</span></label>
+        <label class="filter-opt"><input type="checkbox" value="Booth" onchange="applyFilters()"> <span class="filter-opt-box"></span><span class="filter-opt-label">Photo Booths</span><span class="filter-opt-count">1</span></label>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <span class="filter-label">Budget</span>
+      <div class="price-inputs">
+        <input type="number" class="price-input" placeholder="Min $" id="price-min" oninput="priceMin=this.value?parseFloat(this.value):0;updateClearButton();applyFilters()">
+        <span class="price-sep">–</span>
+        <input type="number" class="price-input" placeholder="Max $" id="price-max" oninput="priceMax=this.value?parseFloat(this.value):Infinity;updateClearButton();applyFilters()">
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <span class="filter-label">Minimum rating</span>
+      <div class="rating-options">
+        <button class="rating-opt" onclick="setRating(this,'4.9')">4.9+</button>
+        <button class="rating-opt" onclick="setRating(this,'4.8')">4.8+</button>
+        <button class="rating-opt" onclick="setRating(this,'4.5')">4.5+</button>
+        <button class="rating-opt active" onclick="setRating(this,'any')">Any</button>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <span class="filter-label">Available on</span>
+      <div class="date-filter">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">From</div>
+            <input type="date" id="date-from" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--text);background:#fff" onchange="applyDateRange()">
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">To</div>
+            <input type="date" id="date-to" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--text);background:#fff" onchange="applyDateRange()">
+          </div>
+          <button onclick="clearDateRange()" id="date-range-clear" style="display:none;background:none;border:none;font-size:12px;color:var(--coral);font-weight:700;cursor:pointer;text-align:left;padding:0;font-family:'Nunito',sans-serif">✕ Clear dates</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="clear-filters" onclick="clearAllFilters()">Clear all filters</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- Category chips -->
+    <!-- Occasion filter chips -->
+    <div class="cat-chips-wrap" style="margin-bottom:10px">
+      <div class="cat-chips" id="occasion-chips">
+        <button class="cat-chip occ-chip active" data-occ="all" onclick="filterOcc(this)"><span class="emoji">🎉</span> All Occasions</button>
+        <button class="cat-chip occ-chip" data-occ="birthday" onclick="filterOcc(this)"><span class="emoji">🎂</span> Birthday</button>
+        <button class="cat-chip occ-chip" data-occ="baby-shower" onclick="filterOcc(this)"><span class="emoji">👶</span> Baby Shower</button>
+        <button class="cat-chip occ-chip" data-occ="corporate" onclick="filterOcc(this)"><span class="emoji">🏢</span> Corporate</button>
+        <button class="cat-chip occ-chip" data-occ="bachelor" onclick="filterOcc(this)"><span class="emoji">🥂</span> Bach Party</button>
+        <button class="cat-chip occ-chip" data-occ="quinceanera" onclick="filterOcc(this)"><span class="emoji">🌹</span> Quinceañera</button>
+        <button class="cat-chip occ-chip" data-occ="wedding" onclick="filterOcc(this)"><span class="emoji">💍</span> Wedding</button>
+      </div>
+    </div>
+
+    <!-- Category filter chips -->
+    <div class="cat-chips-wrap">
+    <div class="cat-chips" id="cat-chips">
+      <button class="cat-chip active" data-cat="all" onclick="filterCat(this)"><span class="emoji">✨</span> All Vendors</button>
+      <button class="cat-chip" data-cat="DJ" onclick="filterCat(this)"><span class="emoji">🎧</span> DJs</button>
+      <button class="cat-chip" data-cat="Photography" onclick="filterCat(this)"><span class="emoji">📸</span> Photography</button>
+      <button class="cat-chip" data-cat="Food" onclick="filterCat(this)"><span class="emoji">🌮</span> Food &amp; Catering</button>
+      <button class="cat-chip" data-cat="Florist" onclick="filterCat(this)"><span class="emoji">💐</span> Florists</button>
+      <button class="cat-chip" data-cat="Bar" onclick="filterCat(this)"><span class="emoji">🍹</span> Bar Service</button>
+      <button class="cat-chip" data-cat="Decor" onclick="filterCat(this)"><span class="emoji">🎈</span> Decor</button>
+      <button class="cat-chip" data-cat="Wedding" onclick="filterCat(this)"><span class="emoji">💍</span> Wedding</button>
+      <button class="cat-chip" data-cat="Booth" onclick="filterCat(this)"><span class="emoji">📷</span> Photo Booths</button>
+    </div>
+    </div>
+
+    <!-- Results bar -->
+    <div class="results-bar">
+      <div class="results-count" id="results-count">Showing <span>12 vendors</span> in Las Vegas</div>
+      <select class="sort-select" onchange="sortVendors(this.value)">
+        <option value="top">⭐ Top Rated</option>
+        <option value="price-low">💰 Price: Low to High</option>
+        <option value="price-high">💰 Price: High to Low</option>
+        <option value="reviews">💬 Most Reviewed</option>
+        <option value="newest">🆕 Newest</option>
+      </select>
+    </div>
+
+    <!-- Active filter pills -->
+    <div class="active-filters" id="active-filters"></div>
+
+    <!-- Vendor grid -->
+    <div class="vendor-grid" id="vendor-grid">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h3>No vendors match these filters</h3>
+        <p>Try adjusting your budget, category, or date range to see more results.</p>
+        <button class="btn btn-coral" onclick="clearAllFilters()">Clear all filters</button>
+      </div>
+
+      <div class="vendor-card" data-cat="DJ" data-rating="4.97" data-price="600" data-reviews="142" data-avail="13,15,16,18,19" data-occasions="birthday,corporate,bachelor,wedding,quinceanera" onclick="openDrawer('dj-voltage')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#F07840,#E8643A)">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="DJ Voltage NV" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-gold">⚡ Top Rated</span></div>
+          <div class="vendor-price">From $600 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">DJ Voltage NV</div><div class="vendor-type">DJ / MC · Henderson, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.97</span><span class="rating-reviews">(142)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Birthdays</span><span class="tag-pill">Corporate</span><span class="tag-pill">Weddings</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available this weekend</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Photography" data-rating="4.95" data-price="450" data-reviews="211" data-avail="14,15,16,17,19" data-occasions="birthday,baby-shower,corporate,bachelor,wedding,quinceanera" onclick="openDrawer('desert-lens')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#7B68EE,#E8643A)">
+          <img src="https://images.unsplash.com/photo-1452721226468-f95fb66ebf83?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Desert Lens Co." loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-gold">✨ Featured</span></div>
+          <div class="vendor-price">From $450 <span>/ 4 hrs</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Desert Lens Co.</div><div class="vendor-type">Photography · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.95</span><span class="rating-reviews">(211)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Events</span><span class="tag-pill">Weddings</span><span class="tag-pill">Portraits</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available Sat &amp; Sun</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Food" data-rating="4.93" data-price="850" data-reviews="89" data-avail="13,14,15,17" data-occasions="birthday,corporate,bachelor,quinceanera" onclick="openDrawer('fuego')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#F9A825,#F57F17)">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Fuego Street Tacos" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-mint">🔥 Popular</span></div>
+          <div class="vendor-price">From $850 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Fuego Street Tacos</div><div class="vendor-type">Taco Truck · North Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.93</span><span class="rating-reviews">(89)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Food Truck</span><span class="tag-pill">Birthdays</span><span class="tag-pill">Corporate</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Books fast</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Food" data-rating="4.98" data-price="180" data-reviews="163" data-avail="13,14,16,17,18" data-occasions="birthday,baby-shower,wedding,quinceanera" onclick="openDrawer('sugar-rush')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#FF9F43,#E8643A)">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Sugar Rush Bakery" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-coral">Fan Favorite</span></div>
+          <div class="vendor-price">From $180 <span>/ cake</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Sugar Rush Bakery</div><div class="vendor-type">Custom Cakes · Summerlin, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.98</span><span class="rating-reviews">(163)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Custom Cakes</span><span class="tag-pill">Dessert Tables</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Order 2 wks ahead</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Florist" data-rating="4.91" data-price="350" data-reviews="74" data-avail="14,15,16,17,18,19" data-occasions="birthday,baby-shower,wedding,quinceanera" onclick="openDrawer('bloom-bar')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#A8E6CF,#56C596)">
+          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Bloom Bar Vegas" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-mint">Trending</span></div>
+          <div class="vendor-price">From $350 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Bloom Bar Vegas</div><div class="vendor-type">Florist &amp; Decor · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.91</span><span class="rating-reviews">(74)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Weddings</span><span class="tag-pill">Baby Showers</span><span class="tag-pill">Decor</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available next week</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Wedding" data-rating="4.99" data-price="750" data-reviews="88" data-avail="13,14,15,16,17" data-occasions="wedding" onclick="openDrawer('vow-co')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#F8C8D4,#E8739A)">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Vow & Co. Vegas" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-gold">⭐ Highly Rated</span></div>
+          <div class="vendor-price">From $750 <span>/ wedding</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Vow &amp; Co. Vegas</div><div class="vendor-type">Wedding Coordinator · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.99</span><span class="rating-reviews">(88)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Day-Of</span><span class="tag-pill">Full Planning</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Booking 2026 dates</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="DJ" data-rating="4.85" data-price="450" data-reviews="67" data-avail="13,15,16,18,19" data-occasions="birthday,bachelor,wedding,quinceanera" onclick="openDrawer('vegas-sound')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#4A90D9,#7B68EE)">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Vegas Sound Co." loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-new">New</span></div>
+          <div class="vendor-price">From $450 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Vegas Sound Co.</div><div class="vendor-type">DJ / MC · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.85</span><span class="rating-reviews">(67)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Quinceañeras</span><span class="tag-pill">Weddings</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">4 dates in July</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Bar" data-rating="4.87" data-price="400" data-reviews="52" data-avail="13,14,15,17,18,19" data-occasions="birthday,corporate,bachelor,wedding" onclick="openDrawer('sin-city-sips')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#2C3E50,#3498DB)">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Sin City Sips" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-mint">Trending</span></div>
+          <div class="vendor-price">From $400 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Sin City Sips</div><div class="vendor-type">Mobile Bar · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.87</span><span class="rating-reviews">(52)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Mobile Bar</span><span class="tag-pill">Cocktails</span><span class="tag-pill">Weddings</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available most weekends</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Decor" data-rating="4.92" data-price="200" data-reviews="91" data-avail="13,14,15,17,18,19" data-occasions="birthday,baby-shower,corporate,bachelor,quinceanera" onclick="openDrawer('pop-twist')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#E8643A,#FF9F43)">
+          <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Pop & Twist LV" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-coral">Fan Favorite</span></div>
+          <div class="vendor-price">From $200 <span>/ 2 hrs</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Pop &amp; Twist LV</div><div class="vendor-type">Balloon Artist · Henderson, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.92</span><span class="rating-reviews">(91)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Balloon Decor</span><span class="tag-pill">Arches</span><span class="tag-pill">Kids Parties</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available this weekend</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Booth" data-rating="4.88" data-price="300" data-reviews="57" data-avail="13,14,16,17,18" data-occasions="birthday,corporate,bachelor,wedding,quinceanera" onclick="openDrawer('snapbooth')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#4ECDC4,#2C9E96)">
+          <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="SnapBooth Vegas" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-new">New</span></div>
+          <div class="vendor-price">From $300 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">SnapBooth Vegas</div><div class="vendor-type">Photo Booth · Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.88</span><span class="rating-reviews">(57)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">360° Booth</span><span class="tag-pill">Glam Booth</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">3 dates this month</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="Photography" data-rating="4.90" data-price="380" data-reviews="43" data-avail="13,14,15,16,17,18,19" data-occasions="birthday,baby-shower,corporate,bachelor,wedding,quinceanera" onclick="openDrawer('neon-lens')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">
+          <img src="https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Neon Lens Studio" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-new">New</span></div>
+          <div class="vendor-price">From $380 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Neon Lens Studio</div><div class="vendor-type">Photo &amp; Video · Summerlin, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.90</span><span class="rating-reviews">(43)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Photo + Video</span><span class="tag-pill">Reels</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available most days</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+      <div class="vendor-card" data-cat="DJ" data-rating="4.82" data-price="350" data-reviews="38" data-avail="13,15,18,19" data-occasions="birthday,corporate,bachelor,quinceanera" onclick="openDrawer('low-key')">
+        <div class="vendor-img" style="background:linear-gradient(135deg,#1A1A2E,#E94560)">
+          <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=400&fit=crop&q=80" class="vendor-img-photo" alt="Low Key Entertainment" loading="lazy" onerror="this.style.display='none'">
+          <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+          <div class="vendor-img-badges"><span class="badge badge-new">New</span></div>
+          <div class="vendor-price">From $350 <span>/ event</span></div>
+        </div>
+        <div class="vendor-body">
+          <div class="vendor-meta">
+            <div><div class="vendor-name">Low Key Entertainment</div><div class="vendor-type">DJ / Live Mix · North Las Vegas, NV</div></div>
+            <div class="vendor-rating"><span class="stars">★</span><span class="rating-num">4.82</span><span class="rating-reviews">(38)</span></div>
+          </div>
+          <div class="vendor-tags"><span class="tag-pill">Hip-Hop</span><span class="tag-pill">Latin</span><span class="tag-pill">R&amp;B</span></div>
+          <div class="vendor-footer"><div class="vendor-avail">Available weekends</div><button class="btn btn-coral view-btn">View Profile</button></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="no-results" id="no-results">
+      <h3>No vendors found</h3>
+      <p>Try adjusting your filters or search terms.</p>
+    </div>
+  </main>
+</div>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- PROFILE DRAWER -->
+<div class="drawer" id="profile-drawer">
+  <div class="drawer-close">
+    <button class="drawer-close-btn" onclick="closeDrawer()">✕</button>
+    <span class="drawer-close-label">Vendor Profile</span>
+    <div class="drawer-cta-top"><a href="#" class="btn btn-outline">Save ♡</a></div>
+  </div>
+
+  <!-- Injected dynamically -->
+  <div id="drawer-content"></div>
+
+  <div class="drawer-bottom">
+    <button class="btn btn-coral" onclick="alert('This would open the booking / message flow in the live product.')">Message Vendor</button>
+    <button class="btn btn-outline" onclick="alert('This would let you request a quote in the live product.')">Request Quote</button>
+  </div>
+</div>
+
+<script>
+// ── VENDOR DATA ──
+const vendors = {
+  'dj-voltage': {
+    photo: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop&q=80',
+    name: 'DJ Voltage NV', type: 'DJ / MC', location: 'Henderson, NV',
+    rating: 4.97, reviews: 142, price: 'From $600',
+    bg: 'linear-gradient(135deg,#F07840,#E8643A)', emoji: '🎧',
+    badge: '<span class="badge badge-gold">⚡ Top Rated</span>',
+    tags: ['Birthdays','Corporate','Weddings','Quince','Pool Parties'],
+    about: "DJ Voltage NV has been rocking Las Vegas events for over 8 years. Specializing in open-format sets that read the crowd and keep the energy right all night. Available for birthdays, corporate events, weddings, quinceañeras, and private parties. Brings professional-grade sound equipment for events of any size.",
+    packages: [
+      { name: 'Starter', price: '$600', per: '3 hrs', desc: 'Perfect for smaller gatherings and backyard parties.', includes: ['DJ + Sound System','3 Hours Music','Wireless Mic','Online Song Requests'] },
+      { name: 'Party Pack', price: '$950', per: '5 hrs', desc: 'Our most popular option for birthdays and corporate events.', includes: ['DJ + MC','Premium Sound System','LED Dance Floor Lighting','5 Hours Music','Wireless Mic','Custom Playlist'], popular: true },
+      { name: 'Full Night', price: '$1,400', per: '8 hrs', desc: 'Full-scale production for weddings and large events.', includes: ['DJ + MC','Full Production Sound','LED Uplighting','Photo Booth Add-on','8 Hours Music','Ceremony Music'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'available'},{name:'Mon',num:'14',status:'booked'},
+      {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'available'},
+      {name:'Thu',num:'17',status:'booked'},{name:'Fri',num:'18',status:'available'},
+      {name:'Sat',num:'19',status:'available'}
+    ],
+    reviewsList: [
+      { author:'Tanya R.', avatar:'👩', bg:'#FFE0B2', event:'30th Birthday · Henderson', stars:'★★★★★', text:'"DJ Voltage showed up early, set up fast, and played exactly the right music all night. Every guest was on the dance floor by 9pm. Would absolutely book again."', date:'March 2026' },
+      { author:'Marcus D.', avatar:'👨', bg:'#E3F2FD', event:'Corporate Holiday Party', stars:'★★★★★', text:'"Professional from start to finish. He took our music preferences seriously and transitioned between genres seamlessly. Our team was blown away."', date:'December 2025' },
+      { author:'Sandra &amp; Ray', avatar:'💑', bg:'#FCE4EC', event:'Wedding Reception · Summerlin', stars:'★★★★★', text:'"Best decision we made for our wedding. DJ Voltage kept every generation dancing and handled all our last-minute song changes without missing a beat."', date:'October 2025' }
+    ]
+  },
+  'desert-lens': {
+    photo: 'https://images.unsplash.com/photo-1452721226468-f95fb66ebf83?w=600&h=400&fit=crop&q=80',
+    name: 'Desert Lens Co.', type: 'Event Photography', location: 'Las Vegas, NV',
+    rating: 4.95, reviews: 211, price: 'From $450',
+    bg: 'linear-gradient(135deg,#7B68EE,#E8643A)', emoji: '📸',
+    badge: '<span class="badge badge-gold">✨ Featured</span>',
+    tags: ['Events','Weddings','Portraits','Quinceañeras','Corporate'],
+    about: "Desert Lens Co. is a full-service event photography studio based in Las Vegas. Known for warm, candid storytelling — capturing genuine moments rather than posed shots. All packages include online gallery delivery within 7 days, full commercial license, and unlimited digital downloads.",
+    packages: [
+      { name: 'Coverage', price: '$450', per: '4 hrs', desc: 'Ideal for birthdays, showers, and smaller celebrations.', includes: ['4 Hours Coverage','Online Gallery','200+ Edited Images','Download License'] },
+      { name: 'Full Event', price: '$850', per: '8 hrs', desc: 'Our go-to for weddings, quinceañeras, and large parties.', includes: ['8 Hours Coverage','2 Photographers','500+ Edited Images','Highlights Reel','Online Gallery'], popular: true },
+      { name: 'Premier', price: '$1,400', per: '10 hrs', desc: 'Premium coverage with same-day sneak peeks.', includes: ['10 Hours Coverage','Lead + Second Photographer','800+ Images','Same-Day Sneak Peek','Printed Album','Drone Shots'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'booked'},{name:'Mon',num:'14',status:'available'},
+      {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'available'},
+      {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'booked'},
+      {name:'Sat',num:'19',status:'available'}
+    ],
+    reviewsList: [
+      { author:'Jessica M.', avatar:'👩', bg:'#FCE4EC', event:'Quinceañera · North LV', stars:'★★★★★', text:'"I cried looking at the photos. She captured every emotional moment — the waltz, the toast, my daughter\'s face seeing the decorations for the first time. Truly talented."', date:'April 2026' },
+      { author:'Alex T.', avatar:'👨', bg:'#E3F2FD', event:'Corporate Event · Las Vegas', stars:'★★★★★', text:'"Incredibly professional. The photos were delivered in 3 days, all perfectly edited. Our marketing team used them across all channels immediately."', date:'February 2026' }
+    ]
+  },
+  'fuego': {
+    photo: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=400&fit=crop&q=80',
+    name: 'Fuego Street Tacos', type: 'Food Truck', location: 'North Las Vegas, NV',
+    rating: 4.93, reviews: 89, price: 'From $850',
+    bg: 'linear-gradient(135deg,#F9A825,#F57F17)', emoji: '🌮',
+    badge: '<span class="badge badge-mint">🔥 Popular</span>',
+    tags: ['Food Truck','Birthdays','Corporate','Pool Parties','Quinceañeras'],
+    about: "Fuego Street Tacos brings authentic Las Vegas street food to your event. Fully self-contained truck with generator — no hookups needed. Serves up to 200 guests per event. Menu includes carne asada, al pastor, birria, chicken, and full vegetarian options. Setup takes 30 minutes.",
+    packages: [
+      { name: 'Fiesta Pack', price: '$850', per: 'up to 50', desc: 'Perfect for birthday parties and small gatherings.', includes: ['3 Taco Choices','Chips & Salsa Bar','2 Hours Service','Paper Goods'] },
+      { name: 'Party Pack', price: '$1,400', per: 'up to 100', desc: 'Most popular for backyard events and corporate lunches.', includes: ['5 Taco Choices','Chips, Salsa & Guac','Agua Fresca Station','3 Hours Service','Setup & Cleanup'], popular: true },
+      { name: 'Full Fiesta', price: '$2,200', per: 'up to 200', desc: 'Full production for large events and celebrations.', includes: ['Full Menu','Drinks Station','Servers Included','4 Hours Service','Premium Packaging','Dessert Option'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'available'},{name:'Mon',num:'14',status:'available'},
+      {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'booked'},
+      {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'booked'},
+      {name:'Sat',num:'19',status:'booked'}
+    ],
+    reviewsList: [
+      { author:'Chris V.', avatar:'👨', bg:'#FFF9C4', event:'Birthday Party · Henderson', stars:'★★★★★', text:'"The taco truck was literally the highlight of my party. People are still talking about it three weeks later. Birria tacos were unreal. Book them before they get even harder to book."', date:'March 2026' },
+      { author:'Daniela R.', avatar:'👩', bg:'#FFEBEE', event:'Quinceañera · Summerlin', stars:'★★★★★', text:'"They were so accommodating with dietary restrictions and the presentation was beautiful. They matched our event aesthetic perfectly. Highly recommend."', date:'January 2026' }
+    ]
+  },
+  'sugar-rush': {
+    photo: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop&q=80',
+    name: 'Sugar Rush Bakery', type: 'Custom Cakes & Desserts', location: 'Summerlin, NV',
+    rating: 4.98, reviews: 163, price: 'From $180',
+    bg: 'linear-gradient(135deg,#FF9F43,#E8643A)', emoji: '🎂',
+    badge: '<span class="badge badge-coral">Fan Favorite</span>',
+    tags: ['Custom Cakes','Dessert Tables','Quinceañeras','Weddings','Corporate'],
+    about: "Sugar Rush Bakery creates fully custom cakes and dessert experiences for Las Vegas events. Every cake is made from scratch with premium ingredients. No two designs are the same. Please order at least 2 weeks in advance — rush orders accepted based on availability.",
+    packages: [
+      { name: 'Celebration Cake', price: '$180', per: 'serves 20', desc: 'A single-tier custom cake for intimate celebrations.', includes: ['Custom Design','Flavor of Choice','Serves 20','Box + Stand'] },
+      { name: 'Statement Cake', price: '$380', per: 'serves 60', desc: '2-3 tier showstopper for milestone birthdays and events.', includes: ['3-Tier Custom Cake','2 Flavor Combos','Fondant Decor','Serves 60','Delivery Included'], popular: true },
+      { name: 'Dessert Table', price: '$650', per: 'serves 80+', desc: 'A full dessert experience — cake, cupcakes, cookies, and more.', includes: ['Tiered Cake','3 Dozen Cupcakes','2 Dozen Cookies','Cake Pops','Table Styling','Full Delivery + Setup'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'available'},{name:'Mon',num:'14',status:'available'},
+      {name:'Tue',num:'15',status:'booked'},{name:'Wed',num:'16',status:'available'},
+      {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'available'},
+      {name:'Sat',num:'19',status:'booked'}
+    ],
+    reviewsList: [
+      { author:'Melissa T.', avatar:'👩', bg:'#FCE4EC', event:'Baby Shower · Summerlin', stars:'★★★★★', text:'"This bakery is next level. The floral cake she made matched our decorations perfectly and tasted even better than it looked. Our guests thought it was too pretty to cut."', date:'April 2026' },
+      { author:'Rosa M.', avatar:'👩', bg:'#F3E5F5', event:'Quinceañera · Las Vegas', stars:'★★★★★', text:'"Best custom cake in Las Vegas, no competition. She listened to every detail of my daughter\'s vision and brought it to life. Exceeded all expectations."', date:'February 2026' }
+    ]
+  },
+  'bloom-bar': {
+    photo: 'https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&h=400&fit=crop&q=80',
+    name: 'Bloom Bar Vegas', type: 'Florist & Event Decor', location: 'Las Vegas, NV',
+    rating: 4.91, reviews: 74, price: 'From $350',
+    bg: 'linear-gradient(135deg,#A8E6CF,#56C596)', emoji: '💐',
+    badge: '<span class="badge badge-mint">Trending</span>',
+    tags: ['Weddings','Baby Showers','Quinceañeras','Corporate','Birthdays'],
+    about: "Bloom Bar Vegas designs fresh floral arrangements and full event decor packages for celebrations of every size. Specializes in lush, maximalist designs for quinceañeras and weddings, and clean modern arrangements for corporate events and showers.",
+    packages: [
+      { name: 'Signature Florals', price: '$350', per: 'event', desc: 'Centerpieces and accent arrangements for smaller events.', includes: ['5 Table Centerpieces','Welcome Arrangement','Fresh Flowers','Delivery + Setup'] },
+      { name: 'Full Bloom', price: '$850', per: 'event', desc: 'Complete floral design for weddings and quinceañeras.', includes: ['Ceremony Arch','10 Centerpieces','Bridal Bouquet','Boutonnieres','Aisle Petals','Delivery + Setup + Breakdown'], popular: true },
+      { name: 'Total Decor', price: '$1,500', per: 'event', desc: 'Full-service florals and decor including backdrops and linens.', includes: ['Full Floral Design','Custom Backdrop','Balloon Installations','Table Linens','Candles + Accessories','Full Day Coordination'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'booked'},{name:'Mon',num:'14',status:'available'},
+      {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'available'},
+      {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'available'},
+      {name:'Sat',num:'19',status:'available'}
+    ],
+    reviewsList: [
+      { author:'Jennifer K.', avatar:'👩', bg:'#E8F5E9', event:'Wedding · Summerlin', stars:'★★★★★', text:'"Absolutely breathtaking. The ceremony arch was everything I dreamed of and more. She sourced the exact roses I wanted and the whole venue was transformed."', date:'March 2026' },
+      { author:'Ana P.', avatar:'👩', bg:'#FCE4EC', event:'Quinceañera · Henderson', stars:'★★★★★', text:'"We got so many compliments on the florals. The whole event looked like something out of a magazine. She worked within our budget and still made it look luxury."', date:'November 2025' }
+    ]
+  },
+  'vow-co': {
+    photo: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop&q=80',
+    name: 'Vow & Co. Vegas', type: 'Wedding Coordinator', location: 'Las Vegas, NV',
+    rating: 4.99, reviews: 88, price: 'From $750',
+    bg: 'linear-gradient(135deg,#F8C8D4,#E8739A)', emoji: '💍',
+    badge: '<span class="badge badge-gold">⭐ Highly Rated</span>',
+    tags: ['Weddings','Elopements','Micro-Weddings','Day-Of','Full Planning'],
+    about: "Vow & Co. Vegas specializes in weddings and elopements in the Las Vegas Valley. From intimate micro-weddings at private villas to full receptions with 200 guests, we handle every detail so you can be present on your day. Trusted vendor network of 50+ Las Vegas suppliers.",
+    packages: [
+      { name: 'Day-Of Coordination', price: '$750', per: 'event', desc: 'You\'ve planned everything — we execute it flawlessly on the day.', includes: ['Day-Of Coordination','6 Hours Coverage','Vendor Liaison','Timeline Management','Emergency Kit'] },
+      { name: 'Month-Of', price: '$1,400', per: 'event', desc: 'We take over the final 4 weeks of planning from you.', includes: ['4-Week Planning Takeover','All Vendor Coordination','Timeline + Logistics','Rehearsal Walkthrough','Full Day Coverage'], popular: true },
+      { name: 'Full Planning', price: '$2,500', per: 'event', desc: 'We plan everything from the venue to the last dance.', includes: ['Full Planning Service','Venue + Vendor Sourcing','Budget Management','Design Consultation','Unlimited Meetings','Full Day Coverage'] }
+    ],
+    availability: [
+      {name:'Sun',num:'13',status:'available'},{name:'Mon',num:'14',status:'available'},
+      {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'available'},
+      {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'booked'},
+      {name:'Sat',num:'19',status:'booked'}
+    ],
+    reviewsList: [
+      { author:'Sophia & Dan', avatar:'💑', bg:'#FCE4EC', event:'Wedding · Private Villa', stars:'★★★★★', text:'"We could not have done it without her. She anticipated every issue before it happened and kept us completely calm all day. Worth every single penny."', date:'February 2026' },
+      { author:'Lily R.', avatar:'👩', bg:'#E3F2FD', event:'Micro-Wedding · Henderson', stars:'★★★★★', text:'"We had 20 guests and wanted it to feel intimate but elevated. She delivered exactly that — every detail was perfect and we didn\'t have to stress about anything."', date:'December 2025' }
+    ]
+  }
+};
+
+// Default for vendors without full data
+const defaultVendor = {
+  about: "This vendor is based in the Las Vegas Valley and serves events across Henderson, Summerlin, North Las Vegas, and the Strip area. Full profile and pricing details available on request.",
+  packages: [
+    { name: 'Standard Package', price: 'From $350', per: 'event', desc: 'Contact for custom pricing based on your event details.', includes: ['Custom Quote','Flexible Hours','Service Area: Las Vegas'] }
+  ],
+  availability: [
+    {name:'Sun',num:'13',status:'available'},{name:'Mon',num:'14',status:'available'},
+    {name:'Tue',num:'15',status:'available'},{name:'Wed',num:'16',status:'booked'},
+    {name:'Thu',num:'17',status:'available'},{name:'Fri',num:'18',status:'available'},
+    {name:'Sat',num:'19',status:'available'}
+  ],
+  reviewsList: [
+    { author:'Party Local', avatar:'🎉', bg:'#FFF8F0', event:'Verified Vendor', stars:'★★★★★', text:'"This vendor has been verified and is part of the Party Local community. More reviews will appear here once bookings are made through the platform."', date:'2026' }
+  ]
+};
+
+const vendorCards = {
+  'vegas-sound': { photo: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop&q=80', name: 'Vegas Sound Co.', type: 'DJ / MC', location: 'Las Vegas, NV', rating: 4.85, reviews: 67, price: 'From $450', bg: 'linear-gradient(135deg,#4A90D9,#7B68EE)', emoji: '🎶', badge: '<span class="badge badge-new">New</span>', tags: ['Quinceañeras','Weddings','Latin','Hip-Hop'] },
+  'sin-city-sips': { photo: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop&q=80', name: 'Sin City Sips', type: 'Mobile Bar', location: 'Las Vegas, NV', rating: 4.87, reviews: 52, price: 'From $400', bg: 'linear-gradient(135deg,#2C3E50,#3498DB)', emoji: '🍹', badge: '<span class="badge badge-mint">Trending</span>', tags: ['Mobile Bar','Cocktails','Weddings','Corporate'] },
+  'pop-twist': { photo: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop&q=80', name: 'Pop & Twist LV', type: 'Balloon Artist', location: 'Henderson, NV', rating: 4.92, reviews: 91, price: 'From $200', bg: 'linear-gradient(135deg,#E8643A,#FF9F43)', emoji: '🎈', badge: '<span class="badge badge-coral">Fan Favorite</span>', tags: ['Balloon Decor','Arches','Garlands','Kids Parties'] },
+  'snapbooth': { photo: 'https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&h=400&fit=crop&q=80', name: 'SnapBooth Vegas', type: 'Photo Booth', location: 'Las Vegas, NV', rating: 4.88, reviews: 57, price: 'From $300', bg: 'linear-gradient(135deg,#4ECDC4,#2C9E96)', emoji: '📷', badge: '<span class="badge badge-new">New</span>', tags: ['360° Booth','Glam Booth','Birthdays','Weddings'] },
+  'neon-lens': { photo: 'https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=600&h=400&fit=crop&q=80', name: 'Neon Lens Studio', type: 'Photo & Video', location: 'Summerlin, NV', rating: 4.90, reviews: 43, price: 'From $380', bg: 'linear-gradient(135deg,#6C5CE7,#a29bfe)', emoji: '🎥', badge: '<span class="badge badge-new">New</span>', tags: ['Photo + Video','Reels','Content Creation'] },
+  'low-key': { photo: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=400&fit=crop&q=80', name: 'Low Key Entertainment', type: 'DJ / Live Mix', location: 'North Las Vegas, NV', rating: 4.82, reviews: 38, price: 'From $350', bg: 'linear-gradient(135deg,#1A1A2E,#E94560)', emoji: '🎵', badge: '<span class="badge badge-new">New</span>', tags: ['Hip-Hop','Latin','R&B','Bachata'] }
+};
+
+function getInitials(name) {
+  const words = name.replace(/[&.]/g,'').split(' ').filter(w => w.length > 1);
+  return (words[0][0] + (words[1] ? words[1][0] : words[0][1])).toUpperCase();
+}
+
+function openDrawer(id) {
+  const v = vendors[id] || { ...vendorCards[id], ...defaultVendor };
+  if (!v) return;
+
+  const avail = (v.availability || defaultVendor.availability).map(d => `
+    <div class="avail-day ${d.status}${d.status === 'available' && d.num === '18' ? ' today' : ''}">
+      <div class="day-name">${d.name}</div>
+      <div class="day-num">${d.num}</div>
+    </div>`).join('');
+
+  const packages = (v.packages || defaultVendor.packages).map(p => `
+    <div class="package">
+      <div class="package-header">
+        <div class="package-name">${p.name}${p.popular ? '<span class="package-popular">Most Popular</span>' : ''}</div>
+        <div class="package-price">${p.price} <span>/ ${p.per}</span></div>
+      </div>
+      <div class="package-desc">${p.desc}</div>
+      <div class="package-includes">${p.includes.map(i => `<span class="package-inc">✓ ${i}</span>`).join('')}</div>
+    </div>`).join('');
+
+  const reviews = (v.reviewsList || defaultVendor.reviewsList).map(r => `
+    <div class="review">
+      <div class="review-header">
+        <div class="review-author">
+          <div class="review-avatar" style="background:${r.bg}">${r.avatar}</div>
+          <div>
+            <div class="review-name">${r.author}</div>
+            <div class="review-event">${r.event}</div>
+          </div>
+        </div>
+        <div class="review-stars">${r.stars}</div>
+      </div>
+      <div class="review-text">${r.text}</div>
+      <div class="review-date">${r.date}</div>
+    </div>`).join('');
+
+  document.getElementById('drawer-content').innerHTML = `
+    <div class="drawer-hero" style="background:${v.bg}">
+      ${v.photo ? `<img src="${v.photo}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt="${v.name}" onerror="this.style.display='none'">` : `<div class="drawer-monogram"><div class="mono-ring"><span class="mono-letters">${getInitials(v.name)}</span></div></div>`}
+      <div class="vendor-img-overlay"></div>
+          <button class="save-btn" onclick="toggleSave(event,this)" title="Save vendor"><span class="heart">♥</span></button>
+      <div class="drawer-hero-badge">${v.badge}</div>
+      <div class="drawer-hero-price">${v.price} <span>/ event</span></div>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-header">
+        <div class="drawer-name">${v.name}</div>
+        <div class="drawer-rating">
+          <span class="drawer-stars">★</span>
+          <span class="drawer-rating-num">${v.rating}</span>
+          <span class="drawer-rating-count">(${v.reviews} reviews)</span>
+        </div>
+      </div>
+      <div class="drawer-meta">
+        <div class="drawer-meta-item">📍 ${v.location}</div>
+        <div class="drawer-meta-item">🎪 ${v.type}</div>
+        <div class="drawer-meta-item" style="color:#1A8050">✓ Verified Vendor</div>
+      </div>
+      <div class="drawer-tags">${(v.tags||[]).map(t=>`<span class="drawer-tag">${t}</span>`).join('')}</div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">About</div>
+        <div class="drawer-about">${v.about}</div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">Packages & Pricing</div>
+        <div class="packages">${packages}</div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">Availability — July 2026</div>
+        <div class="avail-grid">${avail}</div>
+        <p style="font-size:12px;color:var(--text-soft);margin-top:10px">Green = available · Send a message to confirm your date.</p>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">Reviews (${v.reviews})</div>
+        <div class="reviews">${reviews}</div>
+      </div>
+    </div>`;
+
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('profile-drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('profile-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════════
+// FILTER STATE — single source of truth
+// ═══════════════════════════════════════
+let activeCat = 'all';
+let activeDate = '';
+let activeOccasion = 'all';
+let activeRatingMin = 0;
+let priceMin = 0;
+let priceMax = Infinity;
+
+// Build availability map from card data attributes
+const availByDay = {};
+document.querySelectorAll('.vendor-card[data-avail]').forEach(card => {
+  (card.dataset.avail || '').split(',').filter(Boolean).forEach(day => {
+    availByDay[day] = (availByDay[day] || 0) + 1;
+  });
+});
+
+// ── UNIFIED FILTER ──
+function applyFilters() {
+  try {
+    const cards = document.querySelectorAll('.vendor-card');
+    let visible = 0;
+    const q = (document.getElementById('search-input').value || '').toLowerCase();
+
+    // Get checked categories from sidebar checkboxes
+    const checkedCats = [...document.querySelectorAll('#cat-filters input:checked')].map(i => i.value);
+
+    cards.forEach(card => {
+      const catMatch  = activeCat === 'all' || card.dataset.cat === activeCat;
+      const checkMatch = checkedCats.length === 0 || checkedCats.indexOf(card.dataset.cat) !== -1;
+      const price = parseFloat(card.dataset.price) || 0;
+      const priceMatch = price >= priceMin && price <= priceMax;
+      const rating = parseFloat(card.dataset.rating) || 0;
+      const ratingMatch = rating >= activeRatingMin;
+      const occMatch  = activeOccasion === 'all' || (card.dataset.occasions || '').split(',').includes(activeOccasion);
+      const days      = (card.dataset.avail || '').split(',').filter(Boolean);
+      const fromVal = (document.getElementById('date-from') || {}).value || '';
+      const toVal = (document.getElementById('date-to') || {}).value || '';
+      let dateMatch = true;
+      if (fromVal || toVal) {
+        const avail = (card.dataset.avail || '').split(',').map(Number);
+        if (fromVal) {
+          const fromDay = new Date(fromVal + 'T00:00:00').getDate();
+          dateMatch = dateMatch && avail.includes(fromDay);
+        }
+        if (toVal) {
+          const toDay = new Date(toVal + 'T00:00:00').getDate();
+          dateMatch = dateMatch && avail.includes(toDay);
+        }
+      }
+      const name      = (card.querySelector('.vendor-name')  || {}).textContent || '';
+      const type      = (card.querySelector('.vendor-type')  || {}).textContent || '';
+      const tags      = [...card.querySelectorAll('.tag-pill')].map(t => t.textContent).join(' ');
+      const textMatch = !q || [name, type, tags].join(' ').toLowerCase().includes(q);
+      const show      = catMatch && checkMatch && occMatch && dateMatch && priceMatch && ratingMatch && textMatch;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    const count = document.getElementById('results-count');
+    if (count) count.innerHTML = `Showing <span>${visible} vendor${visible !== 1 ? 's' : ''}</span> in Las Vegas`;
+    const none = document.getElementById('no-results');
+    if (none) none.style.display = visible === 0 ? 'block' : 'none';
+
+    // Empty state
+    const emptyState = document.getElementById('empty-state');
+    if (emptyState) emptyState.style.display = visible === 0 ? 'flex' : 'none';
+    // Active filter pills
+    updateFilterPills();
+    updateClearButton();
+  } catch (e) {
+    console.warn('applyFilters error:', e);
+  }
+}
+
+// ── CLEAR BUTTON STATE ──
+function updateClearButton() {
+  const btn = document.querySelector('.clear-filters');
+  if (!btn) return;
+  const checkedCount = document.querySelectorAll('#cat-filters input:checked').length;
+  const hasPriceFilter = priceMin > 0 || priceMax < Infinity;
+  const fromV = (document.getElementById('date-from')||{}).value||'';
+  const toV = (document.getElementById('date-to')||{}).value||'';
+  const hasFilters = activeCat !== 'all' || fromV || toV || checkedCount > 0 || hasPriceFilter || activeRatingMin > 0 || activeOccasion !== 'all';
+  btn.classList.toggle('has-filters', hasFilters);
+}
+
+// ── CATEGORY CHIPS ──
+
+// ── SAVE / HEART ──
+const savedVendors = new Set();
+function toggleSave(e, btn) {
+  e.stopPropagation();
+  const card = btn.closest('.vendor-card');
+  const name = card.querySelector('.vendor-name').textContent;
+  if (savedVendors.has(name)) {
+    savedVendors.delete(name);
+    btn.classList.remove('saved');
+    btn.querySelector('.heart').style.color = '#ccc';
+  } else {
+    savedVendors.add(name);
+    btn.classList.add('saved');
+    btn.querySelector('.heart').style.color = 'var(--coral)';
+  }
+}
+
+// ── ACTIVE FILTER PILLS ──
+function updateFilterPills() {
+  const container = document.getElementById('active-filters');
+  if (!container) return;
+  container.innerHTML = '';
+  const pills = [];
+
+  // Category chip
+  if (activeCat !== 'all') pills.push({ label: activeCat, remove: () => { const b = document.querySelector('.cat-chip[data-cat="all"]'); if(b) filterCat(b); } });
+
+  // Occasion chip
+  if (activeOccasion !== 'all') pills.push({ label: activeOccasion.charAt(0).toUpperCase() + activeOccasion.slice(1), remove: () => { const b = document.querySelector('.occ-chip[data-occ="all"]'); if(b) filterOcc(b); } });
+
+  // Checkboxes
+  document.querySelectorAll('#cat-filters input:checked').forEach(cb => {
+    const label = cb.closest('label').querySelector('.filter-opt-label').textContent;
+    pills.push({ label, remove: () => { cb.checked = false; applyFilters(); } });
+  });
+
+  // Rating
+  if (activeRatingMin > 0) pills.push({ label: activeRatingMin + '+ stars', remove: () => { const b = document.querySelector('.rating-opt[onclick*="any"]'); if(b) setRating(b,'any'); } });
+
+  // Price
+  if (priceMin > 0) pills.push({ label: 'Min $' + priceMin, remove: () => { priceMin=0; document.getElementById('price-min').value=''; applyFilters(); } });
+  if (priceMax < Infinity) pills.push({ label: 'Max $' + priceMax, remove: () => { priceMax=Infinity; document.getElementById('price-max').value=''; applyFilters(); } });
+
+  // Date range
+  const fromV = (document.getElementById('date-from')||{}).value||'';
+  const toV = (document.getElementById('date-to')||{}).value||'';
+  if (fromV) pills.push({ label: 'From ' + fromV, remove: () => { document.getElementById('date-from').value=''; applyDateRange(); } });
+  if (toV) pills.push({ label: 'To ' + toV, remove: () => { document.getElementById('date-to').value=''; applyDateRange(); } });
+
+  pills.forEach(p => {
+    const pill = document.createElement('div');
+    pill.className = 'filter-pill';
+    pill.innerHTML = '<span>' + p.label + '</span><button class="filter-pill-remove" title="Remove filter">×</button>';
+    pill.querySelector('.filter-pill-remove').addEventListener('click', () => { p.remove(); updateFilterPills(); });
+    container.appendChild(pill);
+  });
+}
+
+function applyDateRange() {
+  var clearBtn = document.getElementById('date-range-clear');
+  var from = document.getElementById('date-from').value;
+  var to = document.getElementById('date-to').value;
+  if (clearBtn) clearBtn.style.display = (from || to) ? 'block' : 'none';
+  applyFilters();
+}
+function clearDateRange() {
+  document.getElementById('date-from').value = '';
+  document.getElementById('date-to').value = '';
+  var clearBtn = document.getElementById('date-range-clear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  applyFilters();
+}
+
+function setRating(btn, val) {
+  document.querySelectorAll('.rating-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeRatingMin = (val === 'any') ? 0 : parseFloat(val);
+  updateClearButton();
+  applyFilters();
+}
+
+function filterCat(btn) {
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat || 'all';
+  applyFilters();
+}
+
+// ── OCCASION FILTER ──
+function filterOcc(btn) {
+  document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  activeOccasion = btn.dataset.occ || 'all';
+  applyFilters();
+}
+
+// ── SORT ──
+function sortVendors(val) {
+  const grid = document.getElementById('vendor-grid');
+  if (!grid) return;
+  const cards = [...grid.querySelectorAll('.vendor-card')];
+  cards.sort((a, b) => {
+    if (val === 'top')        return parseFloat(b.dataset.rating)  - parseFloat(a.dataset.rating);
+    if (val === 'price-low')  return parseFloat(a.dataset.price)   - parseFloat(b.dataset.price);
+    if (val === 'price-high') return parseFloat(b.dataset.price)   - parseFloat(a.dataset.price);
+    if (val === 'reviews')    return parseInt(b.dataset.reviews)    - parseInt(a.dataset.reviews);
+    return 0;
+  });
+  cards.forEach(c => grid.appendChild(c));
+}
+
+// ── SEARCH ──
+const searchInput = document.getElementById('search-input');
+if (searchInput) searchInput.addEventListener('input', applyFilters);
+
+// ── CALENDAR ──
+function buildCalendar() {
+  const grid = document.getElementById('cal-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  // July 2026 starts on Wednesday (day index 3, 0=Sun)
+  for (let i = 0; i < 3; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    grid.appendChild(empty);
+  }
+  for (let d = 1; d <= 31; d++) {
+    const btn   = document.createElement('button');
+    const day   = String(d);
+    const count = availByDay[day] || 0;
+    btn.className = 'cal-day' + (count > 0 ? ' has-vendors' : ' no-vendors');
+    btn.textContent = d;
+    if (count > 0) {
+      btn.title   = `${count} vendor${count !== 1 ? 's' : ''} available`;
+      btn.onclick = () => selectCalDay(btn, day, count);
+    } else {
+      btn.disabled = true;
+    }
+    if (day === activeDate) btn.classList.add('selected');
+    grid.appendChild(btn);
+  }
+}
+
+function selectCalDay(btn, day, count) {
+  document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('selected'));
+  if (activeDate === day) {
+    activeDate = '';
+    setCalNote('Select a date to filter vendors');
+    showCalClear(false);
+  } else {
+    btn.classList.add('selected');
+    activeDate = day;
+    setCalNote(`${count} vendor${count !== 1 ? 's' : ''} available Jul ${day}`);
+    showCalClear(true);
+  }
+  applyFilters();
+}
+
+function clearDate() {
+  activeDate = '';
+  document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('selected'));
+  setCalNote('Select a date to filter vendors');
+  showCalClear(false);
+  applyFilters();
+}
+
+function setCalNote(text) {
+  const el = document.getElementById('cal-note');
+  if (el) el.textContent = text;
+}
+
+function showCalClear(show) {
+  const el = document.getElementById('cal-clear');
+  if (el) el.style.display = show ? 'block' : 'none';
+}
+
+// ── CLEAR ALL ──
+function clearAllFilters() {
+  activeCat = 'all';
+  var df=document.getElementById('date-from'); if(df) df.value='';
+  var dt=document.getElementById('date-to'); if(dt) dt.value='';
+  var dc=document.getElementById('date-range-clear'); if(dc) dc.style.display='none';
+  activeDate = '';
+  activeOccasion = 'all';
+  activeRatingMin = 0;
+  priceMin = 0;
+  priceMax = Infinity;
+  document.getElementById('price-min').value = '';
+  document.getElementById('price-max').value = '';
+  document.querySelectorAll('.rating-opt').forEach(b => b.classList.remove('active'));
+  const anyRating = document.querySelector('.rating-opt[onclick*="any"]');
+  if (anyRating) anyRating.classList.add('active');
+  document.querySelectorAll('.occ-chip').forEach(c => c.classList.remove('active'));
+  const allOcc = document.querySelector('.occ-chip[data-occ="all"]');
+  if (allOcc) allOcc.classList.add('active');
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  const allChip = document.querySelector('[data-cat="all"]');
+  if (allChip) allChip.classList.add('active');
+  document.querySelectorAll('.vendor-card').forEach(c => c.classList.remove('hidden'));
+  document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('selected'));
+  const si = document.getElementById('search-input');
+  if (si) si.value = '';
+  setCalNote('Select a date to filter vendors');
+  showCalClear(false);
+  updateClearButton();
+  const count = document.getElementById('results-count');
+  if (count) count.innerHTML = `Showing <span>12 vendors</span> in Las Vegas`;
+  const none = document.getElementById('no-results');
+  if (none) none.style.display = 'none';
+}
+
+// ── DRAG-TO-SCROLL CHIPS ──
+(function() {
+  const slider = document.getElementById('cat-chips');
+  if (!slider) return;
+  let isDown = false, startX, scrollLeft;
+  slider.addEventListener('mousedown', e => {
+    isDown = true;
+    slider.style.cursor = 'grabbing';
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    e.preventDefault();
+  });
+  document.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.style.cursor = 'grab';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const x = e.pageX - slider.offsetLeft;
+    slider.scrollLeft = scrollLeft - (x - startX);
+  });
+})();
+
+
+
+
+// ── CHECKBOX FILTERS ──
+document.querySelectorAll('#cat-filters input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    applyFilters();
+  });
+});
+
+// ── PRICE RANGE ──
+var pmn = document.getElementById('price-min');
+var pmx = document.getElementById('price-max');
+if (pmn) pmn.addEventListener('input', function() { priceMin = this.value ? parseFloat(this.value) : 0; applyFilters(); });
+if (pmx) pmx.addEventListener('input', function() { priceMax = this.value ? parseFloat(this.value) : Infinity; applyFilters(); });
+
+
+// ── READ URL PARAMS & PRE-APPLY FILTERS ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const occ = params.get('occasion');
+  const cat = params.get('cat');
+
+  if (occ) {
+    const btn = document.querySelector('.occ-chip[data-occ="' + occ + '"]');
+    if (btn) filterOcc(btn);
+  }
+  if (cat) {
+    const btn = document.querySelector('.cat-chip[data-cat="' + cat + '"]:not(.occ-chip)');
+    if (btn) filterCat(btn);
+  }
+})();
+
+// ── MOBILE MENU ──
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+if (window.innerWidth <= 900) {
+  const fb = document.getElementById('filter-btn');
+  const bb = document.getElementById('back-btn');
+  if (fb) fb.style.display = 'flex';
+  if (bb) bb.style.display = 'flex';
+}
+</script>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="homepage.html">← Back to Home</a>
+  <a href="vendor-landing.html" class="btn btn-outline">List Your Business</a>
+  <a href="#" class="btn btn-coral">Post an Event</a>
+</div>
+</body>
+</html>
